@@ -1,12 +1,8 @@
-/*
- * Memory.c
- *
- *  Created on: 14 apr. 2016
- *      Author: dharrison
- */
-
 #include <stdlib.h>
 
+double *matrix1D(int np);
+double **matrix2D(int nm, int np);
+void free2D(double** f, int nm);
 
 double *matrix1D(int np) {
     double *a;

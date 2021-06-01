@@ -1,13 +1,11 @@
-/*
- * MatrixOps.c
- *
- *  Created on: 15 apr. 2016
- *      Author: dharrison
- */
-
 #include <math.h>
-#include <stdlib.h>
-#include"MatrixOps.hpp"
+#include"Memory.h"
+
+void MatTranspose(double** A, int rows, int columns, double** result);
+void MatMult(double** A, int rows1, int columns1, double** B, int rows2, int columns2, double** result);
+void Matinverse(double** num, double** X_inv, int f);
+double Matdeterminant(double** a, int k);
+
 
 void MatMult(double** A, int rows1, int columns1, double** B, int rows2, int columns2, double** result) {
     /*
@@ -38,19 +36,17 @@ void MatTranspose(double** A, int rows, int columns, double** result) {
 
 }
 
-//************** Inverse matrix start *****************//
 void Matinverse(double** num, double** X_inv, int f)
 {
-    double *b[f];
-    for (int br = 0; br < f; br++)
-    {
-        b[br] = (double*)malloc(f*sizeof(double));
-    }
-    double *fac[f];
-    for (int facr = 0; facr < f; facr++)
-    {
-        fac[facr] = (double*)malloc(f*sizeof(double));
-    }
+    /*
+     * This function computes the inverse of matrix num of size f(rows)xf(columns)
+     * and returns it by storing into X_inv of size f(rows)xf(columns)
+     */
+
+    double **b;
+    b = matrix2D(f,f);
+    double **fac;
+    fac = matrix2D(f,f);
     int p, q, m, n, i, j;
 
     for (q = 0; q < f; q++)
@@ -82,11 +78,8 @@ void Matinverse(double** num, double** X_inv, int f)
         }
 
     }
-    double *b1[f];
-    for (int b1r = 0; b1r < f; b1r++)
-    {
-        b1[b1r] = (double*)malloc(f*sizeof(double));
-    }
+    double **b1;
+    b1 = matrix2D(f,f);
     double d;
 
     for (i = 0; i < f; i++)
@@ -97,11 +90,8 @@ void Matinverse(double** num, double** X_inv, int f)
             b1[i][j] = fac[j][i];
         }
     }
-    double *flk[f];
-    for (int flkr = 0; flkr < f; flkr++)
-    {
-        flk[flkr] = (double*)malloc(f*sizeof(double));
-    }
+    double **flk;
+    flk = matrix2D(f,f);
     for (i = 0; i < f; i++)
     {
         for (j = 0; j < f; j++)
@@ -110,7 +100,6 @@ void Matinverse(double** num, double** X_inv, int f)
         }
     }
     d = Matdeterminant(flk, f);
-    //printf("%f",d);
 
     for (int i1 = 0; i1 < f; i1++)
     {
@@ -119,20 +108,22 @@ void Matinverse(double** num, double** X_inv, int f)
             X_inv[i1][j1] = (b1[i1][j1]) / (d);
         }
     }
+    free2D(b,f);
+    free2D(fac,f);
+    free2D(b1,f);
+    free2D(flk,f);
 }
-//************** Inverse matrix over *****************//
 
-//************** Determinant start *****************//
 double Matdeterminant(double** a, int k)
 {
+    /*
+     * This function returns the determinant of matrix a of size k(rows)xk(columns)
+     */
 
     static float det;
     double s = 1;
-    double *b[k];
-    for (int i = 0; i < k; i++)
-    {
-        b[i] = (double*)malloc(k*sizeof(double));
-    }
+    double **b;
+    b = matrix2D(k,k);
 
     int i, j, m, n, c;
 
@@ -193,8 +184,9 @@ double Matdeterminant(double** a, int k)
         }
 
     }
-
+    free2D(b,k);
     return (det);
 
 }
 //************** Determinant over *****************//
+

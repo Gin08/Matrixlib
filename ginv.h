@@ -1,8 +1,5 @@
 #include"math.h"
-#include"MatrixOps.hpp"
-#include"MatrixOps.cpp"
-#include"Memory.hpp"
-#include"Memory.cpp"
+#include"MatrixOps.h"
 
 double sqrt(double x);
 
@@ -11,17 +8,14 @@ double sqrt(double x);
 
 void pinvF(double** G, int m, int n, double** result)
 {
-    int mi = m;
+    int mi = m; 
     int ni = n;
-    double *GTranspose[n];
-    for(int tempGt1 = 0;tempGt1<n;tempGt1++)
-    {
-        GTranspose[tempGt1] = (double *)malloc(m * sizeof(double));
-    }
+    double **GTranspose;
+    GTranspose = matrix2D(n,m);
     MatTranspose(G,m,n,GTranspose);
     bool transpose = 0;
-    int size_A;
     double **A;
+    int size_A;
     if(m<n)
     {
         size_A = m;
@@ -181,4 +175,5 @@ void pinvF(double** G, int m, int n, double** result)
     }
     free2D(A,size_A);
     free2D(M1,r);
+    free2D(GTranspose,n);
 }
