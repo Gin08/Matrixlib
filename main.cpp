@@ -1,5 +1,6 @@
 #include"stdio.h"
-#include"ginv.h"
+#include"src\ginv.h"
+#include"src\randMatrix.h"
 
 int main()
 {
@@ -25,6 +26,17 @@ int main()
         }
         printf("\n");
     }
+    double **Xnew = randmatrix(8,9,1.23,10.45);
+    printf("\n random matrix :\n");
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            printf("%f, ",Xnew[i][j]);
+        }
+        printf("\n");
+    }
+    free2D(Xnew,8);
     free2D(X,6);
     free2D(ginv,6);
     return 0;
