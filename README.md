@@ -1,30 +1,26 @@
-# C++ Matrix library
-## Code Features:
-- Generalised Inverse of m(rows) x n(columns) Matrix.
-- Dynamic 1D & 2D array allocation to a variable.
-- Generates random "mxn" matrix with double type in cell.
-- Multiplication of 2 Matrices of sizes n x m & m x p.
-- Transpose of Matrix.
-- Inverse of nxn Matrix.
-- Determinant of Matrix.
+# C++ Matrix Code
+## Features:
+* A small c++ real matrix header file with only using standrad library, easy to modify.
+* Defined class "Matrix" with private variables num_rows, num_cols & double **M.
+* Included all algorithmic operations like +,-,* between two matrices 
 ---
-## Upcoming Features  
-- Square root of Matrix.
-- randomize the value in matrix cells properly
-- rank of Matrix.
-- Few decompositions such as QR, schur.
+## Available Functions  
+* <b>randMatrix(a,b)</b> - generates random matrix between a & b
+* <b>rank</b> - Calculate matrix rank (Cholesky decomposition)
+* <b>det</b> - returns the determinant of nxn matrix
+* <b>inv</b> - returns inverse of nxn Matrix
 ---
-## How to use Code
-- Use `main.cpp` to use existing data, refer to `Memory.h`, function input & return variable.
-- Include respective header files in src folder to use the features in code.
----
-## Code status
-- Partly optimised.
-- Not a clean code.
-- Open to suggestions, issues.
----
-## Validations
-- Functions written in C are written as functions in matlab & mentioned in `Matlab` folder.
+## Examples
+* few code snippets that'll help you understand a little better on how to use .hpp file.
+### 1 -> Random Matrix, rank, determinant & inverse
+```cpp
+#include "src/matrixReal.hpp"
+using namespace std;
+int main(){
+    cout<<"test 0 passed"<<endl;  // Library initialisation test
+    return 0;
+}
+```
 ---
 ## References
-- All the references mentioned in Research papers. 
+* Pierre Courrieu, Fast Computation of Moore-Penrose Inverse Matrices, https://arxiv.org/abs/0804.4809
